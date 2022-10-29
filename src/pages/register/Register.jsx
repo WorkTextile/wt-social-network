@@ -12,7 +12,7 @@ const Register = () => {
             </p>
             <span> as tu déja un compte ?</span>
             <Link to="/login">
-            <button>Login</button>
+              <button>Login</button>
             </Link>
           </div>
           <div className="right">
