@@ -11,11 +11,14 @@ import {
 import RightBar from "./components/rightBar/RightBar";
 import LeftBar from "./components/leftBar/LeftBar";
 import Profile from "./pages/profile/Profile";
-import Home from "./pages/home/Home";  
+import Home from "./pages/home/Home";
+import { useContext } from "react";
+import { AuthContext } from "./context/authContext";
+
 
 function App() {
 
-  const currentUser = true;
+  const { currentUser } = useContext(AuthContext);
 
   const Layout = () => {
     return (
@@ -23,7 +26,7 @@ function App() {
         <NavBar />
         <div style={{ display: "flex" }}>
           <LeftBar />
-          <div style={{ flex:6 }}>
+          <div style={{ flex: 6 }}>
             <Outlet />
           </div>
           <RightBar />

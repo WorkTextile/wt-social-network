@@ -11,15 +11,23 @@ import {MdOutlineCalendarToday}  from 'react-icons/md'
 import {GiSewingMachine}  from 'react-icons/gi'
 import {MdCardMembership}  from 'react-icons/md'
 import {BiNews}  from 'react-icons/bi'
+import { useContext } from "react";
+import {AuthContext} from "../../context/authContext";
 
 const LeftBar = () => {
+
+    const { currentUser } = useContext(AuthContext);
+
     return (
         <div className="leftBar">
             <div className="container">
                 <div className="menu">
                     <div className="user">
-                    <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="profile-image" />
-                    <span>Angela</span>
+                    <img 
+                        src={ currentUser.profilePic}
+                        alt="profile-image" 
+                     />
+                    <span>{currentUser.name}</span>
                     </div>
                     <div className="item">
                         <MdOutlineNotificationsNone />
