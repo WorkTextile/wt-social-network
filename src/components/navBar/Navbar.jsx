@@ -24,12 +24,14 @@ const NavBar = () => {
                 <Link to="/" style={{ textDecoration: "none"}}>
                     <Logo src={logo}/>
                 </Link>
-                <HomeOutlinedIcon />
-                <DarkModeOutlinedIcon />
-                <GridViewOutlinedIcon/>
                 <div className="search">
                     <SearchOutlinedIcon />
-                    <input type="text" placeholder="Search.." />
+                    <input type="text" placeholder="Recherche..." />
+                </div>
+                <div className="icons">
+                    <HomeOutlinedIcon />
+                    <DarkModeOutlinedIcon />
+                    <GridViewOutlinedIcon/>
                 </div>
             </div>
             <div className="right">

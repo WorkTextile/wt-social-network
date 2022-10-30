@@ -1,3 +1,91 @@
 .rightBar{
     flex: 3;
+    position: sticky;
+    top: 70px;
+    height: calc(100vh - 70px);
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    .container{
+
+        .item{
+            padding: 20px;
+            span{
+                color: gray;
+            }
+            .user{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 20px 0px;
+                position: relative;
+
+                .userInfo{
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+
+                    img{
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        border: 1px solid #11AFD3;
+                    }
+
+                    .online{
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        background-color: limegreen;
+                        position: absolute;
+                        top: 0px;
+                        left: 25px;
+                    }
+
+                    p{
+                        color: gray;
+                    }
+
+                    span{
+                        font-weight: 500;
+                        color: #2B3233;
+                    }
+
+                }
+                .buttons{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    
+
+                    button {
+                        border: none;
+                        padding: 5px;
+                        color: white;
+                        cursor: pointer;
+                        border-radius: 0.5rem;
+
+                        &:first-child {
+                            background-color: #11AFD3;
+                        }
+                        
+                        &:last-child { 
+                            background-color: #BD1BEE;
+                        }
+                            
+                    }
+                }
+            }
+
+        }
+        hr {
+            border: none;
+            height: 0.5px;
+            background-color: lightgrey;
+        }
+
+    }
 }

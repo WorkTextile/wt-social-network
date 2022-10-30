@@ -75,7 +75,7 @@ const LeftBar = () => {
                     </div>
                     <div className="item">
                         <MdCardMembership />
-                        <span>Members</span>
+                        <span>Membres</span>
                     </div>
                     <div className="item">
                         <BiNews />
