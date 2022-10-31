@@ -1,11 +1,10 @@
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import NavBar from "./components/navBar/Navbar";
-import { Navigate } from "react-router-dom";
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
+  Navigate,
   Outlet,
 } from "react-router-dom";
 import RightBar from "./components/rightBar/RightBar";
@@ -14,26 +13,30 @@ import Profile from "./pages/profile/Profile";
 import Home from "./pages/home/Home";
 import { useContext } from "react";
 import { AuthContext } from "./context/authContext";
-
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
 
   const { currentUser } = useContext(AuthContext);
 
+  const queryClient = new QueryClient();
+
   const Layout = () => {
     return (
-      <div>
-        <NavBar />
-        <div style={{ display: "flex" }}>
-          <LeftBar />
-          <div style={{ flex: 6 }}>
-            <Outlet />
+      <QueryClientProvider client={queryClient}>
+        <div>
+          <NavBar />
+          <div style={{ display: "flex" }}>
+            <LeftBar />
+            <div style={{ flex: 6 }}>
+              <Outlet />
+            </div>
+            <RightBar />
           </div>
-          <RightBar />
         </div>
-      </div>
-    )
-  }
+      </QueryClientProvider>
+    );
+  };
 
   const ProtectedRoute = ({ children }) => {
     if(!currentUser) {
@@ -41,7 +44,7 @@ function App() {
     }
 
     return children;
-  }
+  };
 
   const router = createBrowserRouter([
     {
@@ -54,13 +57,13 @@ function App() {
       children:[
         {
           path: "/",
-          element: <Home/>
+          element: <Home/>,
         },
         {
           path: "/profile/:id",
-          element: <Profile/>
-        }
-      ]
+          element: <Profile/>,
+        },
+      ],
     },
     {
       path: "/login",
