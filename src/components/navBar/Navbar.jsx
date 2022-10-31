@@ -30,10 +30,8 @@ const NavBar = () => {
                     <SearchOutlinedIcon />
                     <input type="text" placeholder="Recherche..." />
                 </div>
-                <div className="icons">
-                    <HomeOutlinedIcon />
-                    <GridViewOutlinedIcon/>
-                </div>
+                <HomeOutlinedIcon />
+                <GridViewOutlinedIcon/>
             </div>
             <div className="right">
                 <PersonOutlinedIcon />
