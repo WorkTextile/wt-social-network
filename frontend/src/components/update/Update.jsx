@@ -20,7 +20,7 @@ const Update = ({ setOpenUpdate, user }) => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await makeRequest.post("/upload", formData);
+      const res = await makeRequest.post("/upload/", formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -46,10 +46,7 @@ const Update = ({ setOpenUpdate, user }) => {
   );
 
   const handleClick = async (e) => {
-    e.preventDefault();
-
-    //TODO: find a better way to get image URL
-    
+    e.preventDefault(); 
     let coverUrl;
     let profileUrl;
     coverUrl = cover ? await upload(cover) : user.coverPic;
@@ -59,7 +56,8 @@ const Update = ({ setOpenUpdate, user }) => {
     setOpenUpdate(false);
     setCover(null);
     setProfile(null);
-
+  }
+  
   return (
     <div className="update">
       <div className="wrapper">

@@ -41,8 +41,19 @@
             }
           }
         }
-      }
 
+        button {
+          position: absolute;
+          right: 600px;
+          border: none;
+          background-color: #f0544f;
+          padding: 5px;
+          cursor: pointer;
+          color: white;
+        }
+    }
+
+    
       .content {
     
         .desc{
