@@ -1,9 +1,11 @@
 import "./share.scss";
 import Image from "../../assets/img.png";
+import Video from "../../assets/video.png";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
+import VideoInput from "./VideoInput";
 
 const Share = () => {
   const [file, setFile] = useState(null);
@@ -77,6 +79,12 @@ const Share = () => {
               <div className="item">
                 <img src={Image} alt="" />
                 <span>Add Image</span>
+              </div>
+            </label>
+            <label htmlFor="file">
+              <div className="item">
+                <img src={Video} alt="" />
+                <span>Add Video</span>
               </div>
             </label>
           </div>

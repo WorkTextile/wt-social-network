@@ -9,6 +9,9 @@ import relationshipRoutes from "./routes/relationships.js";
 import cors from "cors";
 import multer from "multer";
 import cookieParser from "cookie-parser";
+import fs from "fs";
+import path from "path";
+
 
 //middlewares
 app.use((req, res, next) => {
@@ -27,6 +30,13 @@ app.use(cookieParser());
   
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
+      if (!fs.existsSync("public")) {
+        fs.mkdirSync("public");
+      }
+  
+      if (!fs.existsSync("public/upload")) {
+        fs.mkdirSync("public/upload");
+      }
       cb(null, "../frontend/public/upload");
     },
     filename: function (req, file, cb) {

@@ -2,16 +2,41 @@ import "./register.scss"
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import SignUpInfo from "../register/SignUpInfo";
+import PersonalInfo from "../register/PersonalInfo";
+import OtherInfo from "../register/OtherInfo";
+import AccountType from "../register/AccountType";
 
 const Register = () => {
-
+  const [page, setPage] = useState(0);
   const [inputs, setInputs] = useState({
-    username: "",
     email: "",
     password: "",
-    name: "",
+    confirmPassword: "",
+    firstName: "",
+    lastName: "",
+    telephone: "",
+    currentJob: "",
+    experience: "",
+    city: "",
+    charges: "",
+    accountType: "",
+    clientStructure: "",
+    industryStructure: "",
   });
 
+  const FormTitles = ["Créer un compte WorkTextile", "Type de Compte", "Informations sur votre : Profil", "Informations sur votre : Savoir-faire"];
+
+  const ButtonText = () => {
+    if ( page === 0 ) {
+      return "Validez votre inscription";
+    } else if (page === FormTitles.length - 1) {
+      return "Finaliser mon inscription";
+    } else {
+      return "Continuer";
+    }
+  }
+ 
   const [err, setErr] = useState(null);
 
   const handleChange = (e) => {
@@ -25,6 +50,18 @@ const Register = () => {
       await axios.post("http://localhost:8800/api/auth/register", inputs);
     } catch(err) {
       setErr(err.response.data);
+    }
+  };
+
+  const PageDisplay = () => {
+    if (page === 0) {
+      return <SignUpInfo formData={handleChange}  />;
+    } else if (page === 1) {
+      return <AccountType formData={handleChange}/>;
+    } else if (page === 1) {
+      return <PersonalInfo formData={handleChange}   />;
+    } else {
+      return <OtherInfo formData={handleChange} />;
     }
   };
 
@@ -42,40 +79,37 @@ const Register = () => {
             </Link>
           </div>
           <div className="right">
-            <h1>Register</h1>
-            <form>
-              <input 
-                type="text" 
-                placeholder="Username" 
-                name="username"
-                onChange={handleChange}
-              />
-              <input 
-                type="email" 
-                placeholder="Email"
-                name="email"
-                onChange={handleChange} 
-              />
-              <input 
-                type="password" 
-                placeholder="Password"
-                name="password"
-                onChange={handleChange} 
-              />
-              <input 
-                type="text" 
-                placeholder="Name" 
-                name="name"
-                onChange={handleChange} 
-              />
+            <div className="form">
+             <h1>{FormTitles[page]}</h1>
+              {PageDisplay()}
               {err && err}
-              <button onClick={handleClick}>Back</button>
-              <button onClick={handleClick}>Next</button>
-            </form>
+              <div class="btn-group">
+                <button 
+                  hidden={page == 0}
+                  onClick={() => {
+                    setPage((currPage) => currPage - 1);
+                    }}
+                 >
+                    Retour
+                  </button>
+
+                <button onClick={() => {
+                  if (page === FormTitles.length - 1) {
+                    alert("FORM SUBMITTED");
+                    console.log(inputs);
+                  } else {
+                    setPage((currPage) => currPage + 1);
+                  }
+                }}
+                >
+                  {ButtonText()}
+              </button>
+            </div>
+          </div>
           </div>
         </div>
       </div>
-  )
+  );
 }
 
 export default Register;
