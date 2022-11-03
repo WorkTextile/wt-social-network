@@ -58,6 +58,20 @@
                     display: flex;
                     flex-direction: column;
                     gap: 10px;
+
+                    .progressbar {
+                        width: 400px;
+                        height: 10px;
+                        background-color: white;
+                        margin-bottom: 50px;
+                      }
+                      
+                      .progressbar div {
+                        width: 25%;
+                        height: 100%;
+                        background-color: #BD1BEE;
+                      }
+
                     input{
                         border: none;
                         border-bottom: 1px solid lightgray;

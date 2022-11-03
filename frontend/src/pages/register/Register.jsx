@@ -9,6 +9,7 @@ import AccountType from "../register/AccountType";
 
 const Register = () => {
   const [page, setPage] = useState(0);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -40,14 +41,34 @@ const Register = () => {
   const [err, setErr] = useState(null);
 
   const handleChange = (e) => {
+    if (e.target.files) {
+      setSelectedFile(e.target.files[0]);
+    }
     setInputs( (prev) => ({...prev, [e.target.name]: e.target.value}));
   };
 
   const handleClick = async (e) => {
     e.preventDefault()
 
+    /*
+    if (!file) {
+      return;
+    }
+    */
+
+    const data = new FormData();
+    data.append("selectedFile", selectedFile);
+
+    const image = { 
+      data: data,
+      headers:  {
+        'content-type': selectedFile.type,
+        'content-length': `${selectedFile.size}`, // 👈 Headers need to be a string
+        }, 
+     };
+
     try {
-      await axios.post("http://localhost:8800/api/auth/register", inputs);
+      await axios.post("http://localhost:8800/api/auth/register", inputs, image);
     } catch(err) {
       setErr(err.response.data);
     }
@@ -57,8 +78,8 @@ const Register = () => {
     if (page === 0) {
       return <SignUpInfo formData={handleChange}  />;
     } else if (page === 1) {
-      return <AccountType formData={handleChange}/>;
-    } else if (page === 1) {
+      return <AccountType formData={handleChange} value = {inputs} />;
+    } else if (page === 2) {
       return <PersonalInfo formData={handleChange}   />;
     } else {
       return <OtherInfo formData={handleChange} />;
@@ -80,7 +101,12 @@ const Register = () => {
           </div>
           <div className="right">
             <div className="form">
-             <h1>{FormTitles[page]}</h1>
+            <div className="progressbar">
+              <div
+                style={{ width: page == 0 ? "25%" : page == 1 ? "50%" : page == 2 ? "75%" : "100%" }}
+              ></div>
+            </div>
+            <h1>{FormTitles[page]}</h1>
               {PageDisplay()}
               {err && err}
               <div class="btn-group">

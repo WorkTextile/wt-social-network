@@ -1,10 +1,10 @@
 import React from "react";
 
-const AccountType = ({formData}) => {
+const AccountType = ({formData, value}) => {
 
   return (
     <>
-        <select name= "accountType" onChange={formData}>
+        <select  value={value.accountType} name = "accountType" onChange={formData}>
             <option>Quel est votre type de compte</option>
             <option value="Client">Client</option>
             <option value="Usine">Usine</option>
@@ -12,7 +12,7 @@ const AccountType = ({formData}) => {
             <option value="Particulier">Particulier</option>
         </select>
 
-        {accountType === "Client" && 
+        {value.accountType === "Client" && 
         <select name="clientStructure" onChange={formData}>
             <option>Quel est votre type de structure ?</option>
             <option value="Marque">Marque</option>
@@ -22,7 +22,7 @@ const AccountType = ({formData}) => {
         </select>
         }
 
-        {accountType === "Usine" &&
+        {value.accountType === "Usine" &&
         <select name="industryStructure" onChange={formData}>
             <option>Quel est votre type de structure ?</option>
             <option value="Usine de Confection">Usine de Confection</option>

@@ -21,6 +21,12 @@ const PersonalInfo = ({ formData }) => {
         name="telephone"
         onChange={formData}
       />
+      <input 
+        type="file"
+        id="avatar" 
+        accept="image/png, image/jpeg" 
+        onChange={formData} />
+        <p>**File Accepted : .jpeg, .jpg, gif et .png</p>
     </div>
   );
 }
