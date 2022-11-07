@@ -1,8 +1,8 @@
-import { db } from "../connect.js";
-import jwt from "jsonwebtoken";
-import moment from "moment";
+const db = require("../connect");
+const jwt = require("jsonwebtoken");
+const moment = require("moment");
 
-export const getPosts = (req, res) => {
+exports.getPosts = (req, res) => {
   const userId = req.query.userId;
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in!");
@@ -29,7 +29,7 @@ export const getPosts = (req, res) => {
   });
 };
 
-export const addPost = (req, res) => {
+exports.addPost = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in!");
 
@@ -51,7 +51,8 @@ export const addPost = (req, res) => {
     });
   });
 };
-export const deletePost = (req, res) => {
+
+exports.deletePost = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in!");
 

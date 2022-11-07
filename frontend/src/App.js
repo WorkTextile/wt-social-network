@@ -14,6 +14,7 @@ import Home from "./pages/home/Home";
 import { useContext } from "react";
 import { AuthContext } from "./context/authContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Main from "../../frontend/src/component/Main";
 
 function App() {
 
@@ -71,9 +72,18 @@ function App() {
     },
     {
       path: "/register",
-      element: <Register />,
+      element: 
+        <QueryClientProvider client={queryClient}>
+          <Register />
+        </QueryClientProvider>,
     },
   ]);
+
+  /*
+   <QueryClientProvider client={queryClient}>
+      <Main />
+    </QueryClientProvider>
+  */
 
   return (
     <div>

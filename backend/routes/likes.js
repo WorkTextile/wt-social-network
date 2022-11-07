@@ -1,5 +1,5 @@
-import express from "express";
-import { getLikes, addLike, deleteLike } from "../controllers/like.js";
+const express = require('express');
+const { getLikes, addLike, deleteLike } = require("../controllers/like");
 
 const router = express.Router()
 
@@ -8,4 +8,4 @@ router.post("/", addLike)
 router.delete("/", deleteLike)
 
 
-export default router
+module.exports = router;

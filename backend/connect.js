@@ -1,10 +1,11 @@
 //DATABASE CONNECTION
+const mysql = require("mysql2");
 
-import mysql from "mysql2"
-
-export const db = mysql.createConnection({
+ const db = mysql.createConnection({
   host:"127.0.0.1",
   user:"root",
   password:"WorkText22@",
   database:"worktextile_social"
 })
+
+module.exports = db;

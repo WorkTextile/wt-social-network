@@ -1,17 +1,18 @@
-import express from "express";
-import userRoutes from "./routes/users.js";
-const app = express();
-import authRoutes from "./routes/auth.js";
-import postRoutes from "./routes/posts.js";
-import commentRoutes from "./routes/comments.js";
-import likeRoutes from "./routes/likes.js";
-import relationshipRoutes from "./routes/relationships.js";
-import cors from "cors";
-import multer from "multer";
-import cookieParser from "cookie-parser";
-import fs from "fs";
-import path from "path";
+const express = require('express');
+const userRoutes = require("./routes/users");
+const authMedia = require("./routes/media");
+const authRoutes = require("./routes/auth");
+const postRoutes = require("./routes/posts");
+const commentRoutes = require("./routes/comments");
+const likeRoutes = require("./routes/likes");
+const relationshipRoutes = require("./routes/relationships");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const path = require('path');
+const multer = require('multer');
 
+
+const app = express();
 
 //middlewares
 app.use((req, res, next) => {
@@ -27,22 +28,18 @@ app.use(
 );
 
 app.use(cookieParser());
-  
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      if (!fs.existsSync("public")) {
-        fs.mkdirSync("public");
-      }
-  
-      if (!fs.existsSync("public/upload")) {
-        fs.mkdirSync("public/upload");
-      }
+
       cb(null, "../frontend/public/upload");
     },
     filename: function (req, file, cb) {
-      cb(null, Date.now() + file.originalname);
+      console.log(file);
+      cb(null, Date.now() + path.extname(file.originalname));
     },
 });
+
 
 const upload = multer({ storage: storage });
 
@@ -51,7 +48,9 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
   res.status(200).json(file.filename);
 });
 
+
 app.use("/api/auth", authRoutes);
+app.use("/api/photo", authMedia);
 app.use("/api/users", userRoutes)
 app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);

@@ -1,7 +1,7 @@
-import { db } from "../connect.js";
-import jwt from "jsonwebtoken";
+const db = require("../connect");
+const jwt = require("jsonwebtoken");
 
-export const getLikes = (req,res)=>{
+exports.getLikes = (req,res)=>{
     const q = "SELECT userId FROM likes WHERE postId = ?";
 
     db.query(q, [req.query.postId], (err, data) => {
@@ -10,7 +10,7 @@ export const getLikes = (req,res)=>{
     });
 }
 
-export const addLike = (req, res) => {
+exports.addLike = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in!");
 
@@ -30,7 +30,7 @@ export const addLike = (req, res) => {
   });
 };
 
-export const deleteLike = (req, res) => {
+exports.deleteLike = (req, res) => {
 
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in!");

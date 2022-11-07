@@ -1,8 +1,9 @@
-import { db } from "../connect.js";
-import jwt from "jsonwebtoken";
-import moment from "moment";
+const db = require("../connect")
+const jwt = require("jsonwebtoken");
+const moment = require("moment");
 
-export const getComments = (req, res) => {
+
+exports.getComments = (req, res) => {
   const q = `SELECT c.*, u.id AS userId, name, profilePic FROM comments AS c JOIN users AS u ON (u.id = c.userId)
     WHERE c.postId = ? ORDER BY c.createdAt DESC
     `;
@@ -13,7 +14,7 @@ export const getComments = (req, res) => {
   });
 };
 
-export const addComment = (req, res) => {
+exports.addComment = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in!");
 
@@ -35,7 +36,7 @@ export const addComment = (req, res) => {
   });
 };
 
-export const deleteComment = (req, res) => {
+exports.deleteComment = (req, res) => {
   const token = req.cookies.access_token;
   if (!token) return res.status(401).json("Not authenticated!");
 

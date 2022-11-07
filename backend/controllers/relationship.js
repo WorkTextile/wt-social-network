@@ -1,7 +1,7 @@
-import { db } from "../connect.js";
-import jwt from "jsonwebtoken";
+const db = require("../connect")
+const jwt = require("jsonwebtoken");
 
-export const getRelationships = (req,res)=>{
+exports.getRelationships = (req,res)=>{
     const q = "SELECT followerUserId FROM relationships WHERE followedUserId = ?";
 
     db.query(q, [req.query.followedUserId], (err, data) => {
@@ -10,7 +10,7 @@ export const getRelationships = (req,res)=>{
     });
 }
 
-export const addRelationship = (req, res) => {
+exports.addRelationship = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in!");
 
@@ -30,7 +30,7 @@ export const addRelationship = (req, res) => {
   });
 };
 
-export const deleteRelationship = (req, res) => {
+exports.deleteRelationship = (req, res) => {
 
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in!");
